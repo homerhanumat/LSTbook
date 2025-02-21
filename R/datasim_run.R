@@ -22,9 +22,13 @@ datasim_run <- function(sim, n=5, seed = NULL, report_hidden = FALSE) {
   names(values) <- as.character(sim$names)
   values[["n"]] <- n # special variable
 
+  # create the environment in which to evaluate sim expresssions:
+  e <- rlang::env_clone(attr(sim, "e"))
+  e$n <- n
+
   # construct the values
   for (k in seq_along(sim$names)) {
-    tmp <- eval(sim$calls[[k]], values)
+    tmp <- eval(sim$calls[[k]], e)
     if (inherits(tmp, "each-object")) {
       # <tmp> is a function that when evaluated gives a single value
       # in return
@@ -47,8 +51,12 @@ datasim_run <- function(sim, n=5, seed = NULL, report_hidden = FALSE) {
       if (length(tmp) < values$n) {
         # if `tmp` is a scalar or short vector, replicate it so that it has `n` entries
         values[[k]] <- rep(tmp, length.out = values$n)
+        # add to the evaluation environment:
+        e[[names(values)[[k]]]] <- rep(tmp, length.out = values$n)
       } else {
         values[[k]] <- tmp
+        # add to the evaluation environment:
+        e[[names(values)[[k]]]] <- tmp
       }
     }
   }
