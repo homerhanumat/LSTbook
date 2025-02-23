@@ -48,7 +48,7 @@
 #' mtcars |> point_plot(mpg ~ wt + cyl)
 #' mtcars |> point_plot(mpg ~ wt + cyl + hp, annot="model")
 #' @export
-point_plot <- function(D, tilde, ..., seed=101,
+point_plot <- function(D, tilde, ..., seed=NULL,
                        annot = c("none", "violin", "model", "bw"),
                        jitter = c("default", "none", "all", "x", "y"),
                        interval = c("confidence", "none", "prediction"),
@@ -59,7 +59,10 @@ point_plot <- function(D, tilde, ..., seed=101,
   interval <- match.arg(interval)
   palette <- match.arg(palette)
   jitter <- match.arg(jitter)
-  set.seed(seed)
+  if (!is.null(seed)) {
+    set.seed(seed)
+  }
+
   # tilde_vars <- all.vars(tilde, unique = FALSE) # get list of variables (with repeats, if any)
 
 
