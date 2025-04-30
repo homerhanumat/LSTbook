@@ -1,6 +1,6 @@
 Package: LSTbook
 Title: Data and Software for "Lessons in Statistical Thinking" 
-Version: 0.6.1.9004
+Version: 0.6.1.91001
 Authors@R: c(
     person(given = "Daniel", family = "Kaplan", email = "dtkaplan@gmail.com", role = c("aut", "cre")),
     person(given = "Randall", family = "Pruim", email = "rpruim@calvin.edu", role = "aut") )
@@ -11,7 +11,7 @@ Description: "Lessons in Statistical Thinking" D.T. Kaplan (2014)
     and simulation. 'LSTbook' supports the student-centered, tidy, 
     pipeline-oriented computing style featured in the book.
 Encoding: UTF-8
-Depends: R (>= 3.5.0)
+Depends: R (>= 4.1.0)
 LazyData: true
 LazyDataCompression: xz
 Imports: rlang,
@@ -26,10 +26,7 @@ Imports: rlang,
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1
 Suggests:
-    igraph, 
-    mosaicData,
-    moderndive,
-    palmerpenguins,
+    igraph,
     stringdist,
     rmarkdown,
     knitr,
